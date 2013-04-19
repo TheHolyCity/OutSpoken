@@ -1,0 +1,126 @@
+/************** 
+Developer: Chris Mennens/
+Designer: Chris Mennens, Bootstrap
+Project: Out.Spoken: Event Social Network
+ **************/
+ 
+												/************** DEFAULT RESETS **************/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+
+/* remember to define focus styles! */
+:focus {
+	outline: 0;
+}
+
+/* remember to highlight inserts somehow! */
+ins {
+	text-decoration: none;
+}
+del {
+	text-decoration: line-through;
+}
+
+/* tables still need 'cellspacing="0"' in the markup */
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+a{
+	text-decoration: none;
+	color: #000;
+}
+
+												/************** Home & Generic Classes **************/
+.ab{
+font-family: Arial;
+font-weight: bold;
+}
+
+.clear{
+clear: both;
+}
+
+#wrapper{
+	width: 960px;
+	margin: 0 auto;
+}
+
+#branding{
+	background: url('../images/brand.jpg') center no-repeat;
+	width: 224px;
+	height: 52px;
+	margin-top:30px;
+	margin-left:20px;
+	margin-bottom: 30px;
+	margin-right: 20px;
+	float:left;
+}							
+#nav{
+	height: 100px;
+	width: 730px;
+}
+
+.subdesc{
+	font-size: 13px;
+	color:#808080;
+}
+
+#findbox{
+	width: 170px;
+	height: 100px;
+	float: left;
+	text-align: center;
+	border-left: solid 1px #F2F2F2;
+}
+
+#find{
+	font-size: 25px;
+	color: #A90641;
+}
+
+#createbox{
+	width: 170px;
+	height: 100px
+	float: left;
+	text-align: center;
+}
+
+#create{
+	font-size: 25px;
+	color: #A90641;
+}
+#signin{
+	width: 100px;
+	float: left;
+}
+.cta{
+	background: url('../images/cta.jpg') center no-repeat;
+	width: 960px;
+	height: 441px;
+	margin:0 auto;
