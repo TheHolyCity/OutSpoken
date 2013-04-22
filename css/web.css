@@ -74,29 +74,39 @@ clear: both;
 #branding{
 	background: url('../images/brand.jpg') center no-repeat;
 	width: 224px;
-	height: 52px;
-	margin-top:30px;
-	margin-left:20px;
-	margin-bottom: 30px;
-	margin-right: 20px;
+	height: 65px;
+	padding-top: 35px;
 	float:left;
-}							
+	margin-right: 45px;
+}
+.navitem{
+	float: left;
+	width: 160px;
+}
+	
+.navitem a{
+	width: 145px;
+	display: block;
+	height: 65px;
+	padding-top: 35px;
+	padding: 45px 20px 0 35px;
+	border-left: solid 1px #F2F2F2;
+}
+						
 #nav{
 	height: 100px;
 	width: 730px;
 }
 
 .subdesc{
-	font-size: 13px;
+	font-size: 12px;
 	color:#808080;
+	font-weight: 100;
 }
 
 #findbox{
-	width: 170px;
-	height: 100px;
-	float: left;
-	text-align: center;
-	border-left: solid 1px #F2F2F2;
+	line-height: 9.5px;
+		
 }
 
 #find{
@@ -104,23 +114,50 @@ clear: both;
 	color: #A90641;
 }
 
-#createbox{
-	width: 170px;
-	height: 100px
-	float: left;
-	text-align: center;
+#createbox {
+	border-right: solid 1px #F2F2F2;
+	line-height: 9.5px;
+	width: 150px;
 }
 
 #create{
 	font-size: 25px;
 	color: #A90641;
 }
-#signin{
+#signin {
+	height: 65px;
+	color: #A90641;
+	font-size: 25px;
+	padding-top: 35px;
+	padding: 45px 20px 0 35px;
 	width: 100px;
-	float: left;
+	float: right;
+	border: none;
 }
+
 .cta{
 	background: url('../images/cta.jpg') center no-repeat;
 	width: 960px;
 	height: 441px;
 	margin:0 auto;
+}
+
+.eventitem{
+
+}
+
+.eventimg{
+	z-index: 1;
+}
+
+.eventtextbg{
+	z-index: 2;
+	background-color: #000;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+    filter: alpha(opacity=50);
+    opacity: 0.5;
+}
+
+.eventtext{
+	z-index: 3;
+}
