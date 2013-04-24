@@ -67,7 +67,7 @@ clear: both;
 }
 
 #wrapper{
-	width: 960px;
+	
 	margin: 0 auto;
 }
 
@@ -136,28 +136,65 @@ clear: both;
 }
 
 .cta{
-	background: url('../images/cta.jpg') center no-repeat;
-	width: 960px;
+	background: url('../images/ctarepeat.jpg') left repeat-x;
+	position: relative;
 	height: 441px;
-	margin:0 auto;
+	margin-left: 255px;
+	
 }
 
-.eventitem{
-
+.ctaleft,
+.ctaright{
+	position:absolute;
+	height: 441px;	
 }
 
-.eventimg{
+.ctaleft{
+	background: url('../images/ctaleft.jpg') left no-repeat;
+	width: 255px;
+	left: 0;
+	margin-left: -255px;
 	z-index: 1;
 }
 
-.eventtextbg{
-	z-index: 2;
-	background-color: #000;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
-    filter: alpha(opacity=50);
-    opacity: 0.5;
+.ctaright{
+	background: url('../images/ctaright.jpg') right no-repeat;
+	width: 433px;
+	right: 0;
 }
 
-.eventtext{
-	z-index: 3;
+.ctahead{
+	margin-left: -255px;
+	position: absolute;
+	left: 15%;
+	z-index: 2;
 }
+.eventitem{
+	width: 300px;
+	height: 300px;
+}
+
+.eventimg{
+	height: 100%;
+	width: 100%;
+	display: block;
+}
+.eventdate{
+	float:left;
+}
+.eventname{
+	width:300px;
+	float: left;
+}
+
+h2{ 
+   color: white; 
+   font: bold 24px/45px Arial, Sans-Serif; 
+   letter-spacing: -1px;  
+   background: rgb(0, 0, 0); /* fallback color */
+   background: rgba(0, 0, 0, 0.7);
+   padding: 10px; 
+   font-size: .9em;
+   
+}
+
