@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<link rel="stylesheet" href="css/web.css" media="screen" />
+		<title>Out.Spoken</title>
+	</head>
+	<body>
+		<div id="wrapper">
+			<header>
+				<div id="branding"></div> <!-- Branding div close -->
+				<div class="nav clearfix">
+					
+					<div id="findbox" class="navitem">
+						<a href="#" id="find" class="ab">Find
+							<span class="subdesc">Something to do...</span></a>
+					</div>
+					
+					<div id="createbox" class="navitem">
+						<a href="#" id="create" class="ab">Create<br/>
+							<span class="subdesc2">a goodtime.</span></a>
+					</div>
+					
+					<a href="#" id="signin" class="ab navitem ">Sign In</a>
+					
+				</div> <!-- Nav div closed -->
+			</header>
+			
+			<div id="register">
+				<form class="regform" action="?" method="post">
+					<div class="clearfix space">
+						<label class="reglabel">Username:</label>
+						<input type="text" class="reguser" required>
+					</div>
+					<div class="clearfix space">
+						<label class="reglabel">Profile image:</label>
+						<input type="file" class="regimg">
+					</div>
+					<div class="clearfix space">
+						<label class="reglabel">Email:</label>
+						<input type="text" class="regemail" required>
+					</div>
+					<div class="clearfix space">
+						<label class="reglabel">Password:</label>
+						<input type="password"	class="regpass" required>
+					</div>
+					<div class="clearfix space">
+						<label class="reglabel">Retype Password:</label>
+						<input type="password" class="regrepass" required>
+					</div>
+					<div class="clearfix space">
+						<label class="reglabel">About you:</label>
+						<textarea class="regbio" placeholder="Tell us a little about you..."></textarea>
+					</div>
+					<div class="clearfix space">
+						<input type="submit" class="regsubmit regbtn" value="Submit">
+					</div>
+				</form>
+			</div><!-- register div closed -->
+			
+			<div id="signinform">
+				<form class="siform" action="?" method="post">
+					<div class="clearfix space">
+						<label class="silabel">Email:</label>
+						<input type="text" class="siemail">
+					</div>
+					<div class="clearfix space">
+						<label class="silabel">Password:</label>
+						<input type="password" class="sipass">
+					</div>
+					<input type="submit" class="sisubmit space" value="Submit">
+				</form>
+			</div> <!-- Signin div closed -->
+		</div><!-- Wrapper div closed -->
+	</body>

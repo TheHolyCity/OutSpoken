@@ -22,6 +22,7 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 	vertical-align: baseline;
 	background: transparent;
 }
+
 body {
 	line-height: 1;
 }
@@ -56,6 +57,70 @@ a{
 	color: #000;
 }
 
+												/************** Font Embedding **************/
+@font-face {
+    font-family: 'across_the_starsregular';
+    src: url('../fonts/ats/acrotsrg-webfont.eot');
+    src: url('../fonts/ats/acrotsrg-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/ats/acrotsrg-webfont.woff') format('woff'),
+         url('../fonts/ats/acrotsrg-webfont.ttf') format('truetype'),
+         url('../fonts/ats/acrotsrg-webfont.svg#across_the_starsregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'Notice1';
+    src: url('../fonts/notice/NoticeStd-webfont.eot');
+    src: url('../fonts/notice/NoticeStd-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/notice/NoticeStd-webfont.woff') format('woff'),
+         url('../fonts/notice/NoticeStd-webfont.ttf') format('truetype'),
+         url('../fonts/notice/NoticeStd-webfont.svg#NoticeNotice') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'Notice2';
+    src: url('../fonts/notice/Notice2Std-webfont.eot');
+    src: url('../fonts/notice/Notice2Std-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/notice/Notice2Std-webfont.woff') format('woff'),
+         url('../fonts/notice/Notice2Std-webfont.ttf') format('truetype'),
+         url('../fonts/notice/Notice2Std-webfont.svg#NoticeNotice2') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'NoticeNotice3';
+    src: url('../fonts/notice/Notice3Std-webfont.eot');
+    src: url('../fonts/notice/Notice3Std-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/notice/Notice3Std-webfont.woff') format('woff'),
+         url('../fonts/notice/Notice3Std-webfont.ttf') format('truetype'),
+         url('../fonts/notice/Notice3Std-webfont.svg#NoticeNotice3') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+.clearfix:before,
+.clearfix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.clearfix {
+    zoom: 1; /* IE < 8 */
+}
+
 												/************** Home & Generic Classes **************/
 .ab{
 font-family: Arial;
@@ -70,7 +135,10 @@ clear: both;
 	
 	margin: 0 auto;
 }
-
+header{
+	border-bottom: thick solid #F2F2F2;
+	display: block;
+}
 #branding{
 	background: url('../images/brand.jpg') center no-repeat;
 	width: 224px;
@@ -78,7 +146,9 @@ clear: both;
 	padding-top: 35px;
 	float:left;
 	margin-right: 45px;
+	margin-left: 25px;
 }
+
 .navitem{
 	float: left;
 	width: 160px;
@@ -88,9 +158,7 @@ clear: both;
 	width: 145px;
 	display: block;
 	height: 65px;
-	padding-top: 35px;
 	padding: 45px 20px 0 35px;
-	border-left: solid 1px #F2F2F2;
 }
 						
 #nav{
@@ -100,18 +168,37 @@ clear: both;
 
 .subdesc{
 	font-size: 12px;
-	color:#808080;
+	color: #B7B7B7;
+	font-weight: 100;
+	margin-left: 1px;
+}
+.subdesc2{
+	font-size: 12px;
+	color: #B7B7B7;
 	font-weight: 100;
 }
 
+
 #findbox{
 	line-height: 9.5px;
-		
+	border-left: solid 1px #F2F2F2;
+	border-right: solid 1px #F2F2F2;
 }
 
 #find{
 	font-size: 25px;
 	color: #A90641;
+	width: 105px;
+	margin-bottom: 0;
+}
+
+#find:hover{
+	background-color: #A90641;
+	color: #fff;
+	border-right: thick solid #910614;
+}
+#find:hover subdesc{
+	color: #fff;
 }
 
 #createbox {
@@ -123,16 +210,25 @@ clear: both;
 #create{
 	font-size: 25px;
 	color: #A90641;
+	width:95px;
+	overflow: hidden;
 }
+
+#create:hover{
+	border-right: thick solid #910614;
+	background-color: #A90641;
+	color: #fff;
+}
+
 #signin {
 	height: 65px;
 	color: #A90641;
 	font-size: 25px;
 	padding-top: 35px;
-	padding: 45px 20px 0 35px;
+	padding: 35px 20px 0 35px;
 	width: 100px;
-	float: right;
 	border: none;
+	clear: right;
 }
 
 .cta{
@@ -147,6 +243,7 @@ clear: both;
 .ctaright{
 	position:absolute;
 	height: 441px;	
+	
 }
 
 .ctaleft{
@@ -164,37 +261,193 @@ clear: both;
 }
 
 .ctahead{
+	margin-top: 75px;
 	margin-left: -255px;
 	position: absolute;
 	left: 15%;
 	z-index: 2;
+	font-family: 'Arial Black';
+	color: #333333;
+	font-size: 60px;
+	text-transform: uppercase;
+	font-weight: bold;
+	width: 375px;
+	line-height: 65px;
 }
-.eventitem{
-	width: 300px;
-	height: 300px;
+.ctahead .ats{
+	font-family: 'across_the_starsregular';
+	font-weight:normal;
+	font-size: 92px;
+	margin-left: 25px;
+	padding-top: 40px;
+	letter-spacing: 4px;
+	
+}
+.symone{
+	 font-family: 'Notice1'; 
+	 position: absolute;
+	 margin-top: 275px;
+	 font-size: 120px;
+	 left:20%;
+	 z-index: 2;
+	 color: #A90641;
+	 margin-left: -255px;
 }
 
-.eventimg{
-	height: 100%;
+.symtwo{
+	font-family: 'Notice2'; 
+	z-index: 2;
+	position: absolute;
+	color: #A90641; 
+	margin-top: 275px;
+	margin-left: -255px;
+	left:48%;
+	font-size: 120px;
+}
+.symthr{
+	font-family: 'Notice1'; 
+	 position: absolute;
+	 z-index: 2;
+	 margin-top: 275px;
+	 color: #A90641; 
+	 left:55%;
+	 font-size: 120px;
+}
+
+.ctasub{
+	position: absolute;
+	margin-top: 380px;
+	z-index: 2;
+	color: #333333;
+	font-size: 25px;
+	font-weight: normal;
+	margin-left: -255px;
+	left:17%;
+}
+.subsec{
+	margin-left:140px;
+	
+}
+.subthi{
+	margin-left:135px;
+}
+.content{
+	border-top: thin solid #b8b8b8;
+}
+.eventhead{
+	background-color: #888888;
+}
+.topevents{
 	width: 100%;
-	display: block;
+	height: 315px
+	width: 100%;
+	background-color: #888888;
+
 }
-.eventdate{
-	float:left;
-}
-.eventname{
-	width:300px;
+
+.eventitem{
+	width: 300px;
+	margin-left: 25px;
 	float: left;
 }
 
-h2{ 
-   color: white; 
-   font: bold 24px/45px Arial, Sans-Serif; 
-   letter-spacing: -1px;  
-   background: rgb(0, 0, 0); /* fallback color */
-   background: rgba(0, 0, 0, 0.7);
-   padding: 10px; 
-   font-size: .9em;
-   
+.eventimg{
+	width: 277px;
+	height: 244px;
+	background: url('../images/eventimg.jpg') top no-repeat;
 }
 
+.eventdate{
+	 float: left;
+	 width: 256px;
+	 color: white; 
+	 font: bold 24px/45px Arial, Sans-Serif; 
+	 letter-spacing: -1px;  
+	 background: rgb(0, 0, 0); /* fallback color */
+	 background: rgba(0, 0, 0, 0.5);
+	 padding: 10px; 
+	 font-size: .9em;
+	 margin-top: -110px;
+ }
+ 
+.eventname{
+	width:300px;
+	display: block;
+	color: #fff;
+}
+
+.eventname:hover{
+	color: #A90641;
+}
+
+#footer{
+	font-family: Arial;
+	color: #fff;
+	font-weight: bold;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-top: thin solid #fff;
+	text-align: center;
+	background-color: #A90641;
+}
+
+												/************** Signin and Register **************/
+
+.register{
+	float: left;
+	width: 475px;
+}											
+.regform{
+	margin-top: 10px;
+	width: 50%;
+	
+}
+.regform label{
+	float: left;
+	width: 150px;
+	margin-left: 10px;
+	color: #A90641;
+	font-size: 15px;
+	font-weight: bold;
+}
+.regform input{
+	float: left;
+	margin-left: 25px;
+	width: 225px;
+	
+}
+.space{
+	margin-top:15px;
+}
+.regform .regimg{
+	width: 300px;
+}
+.regform .regbio{
+	width: 230px;
+	margin-left: 25px;
+}
+.regform .regbtn{
+	margin-left: 340px;
+	width: 80px;
+	
+}
+
+#signin{
+	width: 475px;
+}	
+.siform .silabel{
+	float: left;
+	width: 150px;
+	margin-left: 10px;
+	color: #A90641;
+	font-size: 15px;
+}
+.siform input{
+	float: left;
+	margin-left: 25px;
+	width: 225px;
+}
+.siform .sisubmit{
+	width: 80px;
+	margin-left: 340px;
+}
