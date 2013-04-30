@@ -288,10 +288,10 @@ header{
 	 position: absolute;
 	 margin-top: 275px;
 	 font-size: 120px;
-	 left:20%;
+	 /*left:20%;*/
 	 z-index: 2;
 	 color: #A90641;
-	 margin-left: -255px;
+	 margin-left: -15px
 }
 
 .symtwo{
@@ -300,8 +300,8 @@ header{
 	position: absolute;
 	color: #A90641; 
 	margin-top: 275px;
-	margin-left: -255px;
-	left:48%;
+	margin-left: 330px;
+	/*left:48%;*/
 	font-size: 120px;
 }
 .symthr{
@@ -309,8 +309,9 @@ header{
 	 position: absolute;
 	 z-index: 2;
 	 margin-top: 275px;
+	 margin-left: 655px;
 	 color: #A90641; 
-	 left:55%;
+	/*left:55%;*/
 	 font-size: 120px;
 }
 
@@ -322,7 +323,7 @@ header{
 	font-size: 25px;
 	font-weight: normal;
 	margin-left: -255px;
-	left:17%;
+	left:200px;
 	font-family: Helvetica,Arial;
 }
 .subsec{
@@ -451,4 +452,64 @@ header{
 .siform .sisubmit{
 	width: 80px;
 	margin-left: 340px;
+}
+
+												/************** ----Find Form---- **************/												
+.searchbox{
+	height: 125px;
+	width: 100%;
+	background-color: #A90641;
+}
+
+#usersearch{
+	width: 300px;
+	height: 40px;
+	margin-left: 35%;
+	margin-top: 40px;
+	font-size: 1.3em;
+}
+
+/************** Result wrapper **************/
+.resultitem{
+	height: 100px;
+	border-bottom: thin solid #000;
+	font-family: Arial,Helvetica,sans-serif;
+}
+
+/************** Result content **************/
+.rdate{
+	margin-left: 15px;
+	width:75px;
+	float: left;
+	margin-top: 45px;
+}
+
+.rtime{
+	float: left;
+	width:75px;
+	margin-top: 45px;
+}
+
+.rimage{
+	width:90px;
+	height:90px;
+	background-color: #000;
+	float: left;
+	margin-top: 5px;
+	
+}
+
+.ruser{
+	margin-left: 15px;
+	margin-top: 10px;
+	width: 125px;
+	float: left;
+}
+
+.revent{
+
+}
+
+.rattend{
+
 }
