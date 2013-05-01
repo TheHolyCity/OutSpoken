@@ -12,7 +12,7 @@
 				<div class="nav clearfix">
 					
 					<div id="findbox" class="navitem">
-						<a href="#" id="find" class="ab">Find
+						<a href="<?=base_url()?>/index.php/site/find" id="find" class="ab">Find
 							<span class="subdesc">Something to do...</span></a>
 					</div>
 					

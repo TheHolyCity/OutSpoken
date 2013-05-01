@@ -113,22 +113,33 @@
 						  'username' => $username,
 						  'logged_in' => $logged_in);
 			
-			$data['friends'] 	= $this->friends(); 
-			$data['routes'] 	= $this->routes();
-			
 			$this->load->view('site/header');
-			$this->subnav();
 			$this->load->view('site/content_find',$data);
 			$this->load->view('site/footer');
 		}
 		
-		function find() {
+		function find($params=null){
+			$search = array();
 			$this->load->model('sitemodel');
-			$events = $this->sitemodel->checkevents();
+			if($params){
+				$search = array("city"=>"= '$params'");
+			}
+			$events = $this->sitemodel->checkevents($search);
 			$data = array('events' => $events);
 			$this->load->view('site/header');
 			$this->load->view('site/find',$data);
-			$this->load->view('site/footer');	
+			$this->load->view('site/footer');
+				
+		}
+		
+		function search(){
+			$this->load->library('form_validation');
+			$this->load->model('sitemodel');
+			$this->form_validation->set_rules("citysearch", '');
+			
+			if($this->form_validation->run()){
+				$this->find(set_value('citysearch'));
+			}
 		}
 		
 		/************** App loads application view for route tracker **************/
@@ -141,7 +152,7 @@
 			$this->load->view('site/loggedin_header');
 			$this->subnav();
 			$this->load->view('site/loggedin_app',$data);
-			$this->load->view('site/loggedin_footer');			
+			$this->load->view('site/loggedin_footer');
 		}
 		
 			/************** Login information is checked against the database and authenticates the user as well as beginning session. **************/

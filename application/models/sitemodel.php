@@ -16,8 +16,18 @@ class Sitemodel extends CI_Model{
 		}
 	}
 	
-	public function checkevents(){
-		$query = $this->db->query("SELECT * from events");
+	public function checkevents($where=array()){
+		$where["date"] = ">=NOW()";
+		$wherestr = " WHERE ";
+		$i=0;
+		foreach($where as $k=>$v){
+			$wherestr.="$k $v";
+			$i++;
+			if($i<sizeof($where)){
+				$wherestr.= " and ";
+			}
+		}
+		$query = $this->db->query("SELECT * from events".($where? $wherestr:"")." ORDER BY date DESC");
 		if($query->num_rows()){
 			$result = $query->result();
 			$result = $result;
