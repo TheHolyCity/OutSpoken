@@ -13,20 +13,30 @@
 				redirect(base_url());
 			}
 		}
+		
 		public function home(){
-				
 				$this->load->model('sitemodel');
 				$this->load->library('form_validation');
-				$this->load->view('site/header');
+				$this->header();
 				$this->load->view('site/content_landing');
 				$this->load->view('site/footer');
+		}
+		
+		public function header(){
+			$this->load->library('session');
+			$loggedin = false;
+			if($this->session->userdata("username")){
+				$loggedin = true;
+			}
+			$data = array("loggedin" => $loggedin);
+			$this->load->view('site/header',$data);
 		}
 		
 		public function signup($data = null){
 			//print_r($data);			
 			$this->load->model('sitemodel');
 			$this->load->library('form_validation');
-			$this->load->view('site/header');
+			$this->header();
 			$this->load->view('site/content_signin',$data);
 			$this->load->view('site/footer');
 		}
@@ -73,6 +83,15 @@
 		
 			
 		}
+		
+		public function profile(){
+			$this->header();
+			
+			$data = $this->session->all_userdata();
+			
+			$this->load->view('site/profile',$data);
+			$this->load->view('site/footer');
+		}
 		/************** Subnav Dynamically load navigation displaying the logged in user pulling information from session **************/
 		public function subnav(){
 			$this->load->library('session');
@@ -113,7 +132,7 @@
 						  'username' => $username,
 						  'logged_in' => $logged_in);
 			
-			$this->load->view('site/header');
+			$this->header();
 			$this->load->view('site/content_find',$data);
 			$this->load->view('site/footer');
 		}
@@ -126,7 +145,7 @@
 			}
 			$events = $this->sitemodel->checkevents($search);
 			$data = array('events' => $events);
-			$this->load->view('site/header');
+			$this->header();
 			$this->load->view('site/find',$data);
 			$this->load->view('site/footer');
 				

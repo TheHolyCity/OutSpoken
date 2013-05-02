@@ -20,8 +20,15 @@
 						<a href="#" id="create" class="ab">Create<br/>
 							<span class="subdesc2">a goodtime.</span></a>
 					</div>
+					<?
+						if($loggedin){?>
+							<a href="<?= base_url()?>index.php/site/logout" id="signin" class="ab navitem ">Sign Out</a>
+					<? }else{?>
+						<a href="<?= base_url()?>index.php/site/register" id="signin" class="ab navitem ">Sign In</a>
+					<? }
+						
+					?>
 					
-					<a href="<?= base_url()?>index.php/site/register" id="signin" class="ab navitem ">Sign In</a>
 					
 				</div> <!-- Nav div closed -->
 			</header>
