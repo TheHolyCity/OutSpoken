@@ -53,18 +53,16 @@
 			$this->form_validation->set_rules('reglocat','');
 			
 			if(! $this->form_validation->run()){
-					$data = array('username'=>set_value('reguser'),'userimg'=>set_value('regimg'),'password'=> md5(set_value('regpass')),'email'=>set_value('regemail'),'aboutme'=>set_value('regbio'),'location'=>set_value('reglocat'));
-					$this->signup($data);
-				}else{
-					$data = array('username'=>set_value('reguser'),'userimg'=>set_value('regimg'),'password'=> md5(set_value('regpass')),'email'=>set_value('regemail'),'aboutme'=>set_value('regbio'),'location'=>set_value('reglocat'));
-					$sql = $this->db->insert_string('users', $data);
-					$this->db->query($sql);
-					$data['id'] = $this->db->insert_id();
-					$this->session->set_userdata($data);
+				$data = array('username'=>set_value('reguser'),'userimg'=>set_value('regimg'),'password'=> md5(set_value('regpass')),'email'=>set_value('regemail'),'aboutme'=>set_value('regbio'),'location'=>set_value('reglocat'));
+				$this->signup($data);
+			}else{
+				$data = array('username'=>set_value('reguser'),'userimg'=>set_value('regimg'),'password'=> md5(set_value('regpass')),'email'=>set_value('regemail'),'aboutme'=>set_value('regbio'),'location'=>set_value('reglocat'));
+				if($this->sitemodel->register($data)) {
 					redirect('site/eventfind',$data);
-					
+				} else {
+					$this->signup($data);
+				}
 			}
-			
 		}
 		/************** Functionality for the edit user form  **************/ 
 		public function edituser(){
@@ -81,6 +79,34 @@
 			redirect('site/userview');
 			
 		
+			
+		}
+		public function create($data = null){
+			$this->load->library('form_validation');
+			$this->header();
+			$this->load->view('site/event');
+			$this->load->view('site/footer');
+			
+			$this->load->model('sitemodel');
+			$this->form_validation->set_rules("ename", 'required');
+			$this->form_validation->set_rules("eimg", '');
+			$this->form_validation->set_rules("etime", 'required');
+			$this->form_validation->set_rules("edate",'required');
+			$this->form_validation->set_rules('edesc','required');
+			$this->form_validation->set_rules('elocat','required');
+			
+			if(! $this->form_validation->run()){
+				$data = array('name'=>set_value('ename'),'image'=>set_value('eimg'),'date'=> set_value('etime'),'date'=>set_value('edate'),'description'=>set_value('edisc'),'city'=>set_value('elocat'));
+				
+			}else{
+				$datetime = date('Y-m-d',strtotime(set_value('edate'))).' '.date('g:i:s',strtotime(set_value('etime')));
+				$data = array('name'=>set_value('ename'),'image'=>set_value('eimg'),'date'=>$datetime,'description'=>set_value('edisc'),'city'=>set_value('elocat'));
+				if($this->sitemodel->createevent($data)) {
+					redirect('site/eventfind');
+				} else {
+					$this->signup($data);
+				}
+			}
 			
 		}
 		

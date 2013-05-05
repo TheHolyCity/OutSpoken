@@ -17,7 +17,7 @@
 					</div>
 					
 					<div id="createbox" class="navitem">
-						<a href="#" id="create" class="ab">Create<br/>
+						<a href="<?=base_url()?>/index.php/site/create" id="create" class="ab">Create<br/>
 							<span class="subdesc2">a goodtime.</span></a>
 					</div>
 					<?

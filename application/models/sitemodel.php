@@ -16,6 +16,30 @@ class Sitemodel extends CI_Model{
 		}
 	}
 	
+	public function register($data){
+		$sql = $this->db->insert_string('users', $data);
+		$this->db->query($sql);
+		$data['id'] = $this->db->insert_id();
+		$this->session->set_userdata($data);
+		if($data['id']) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public function createevent($data){
+		$sql = $this->db->insert_string('events', $data);
+		$this->db->query($sql);
+		$data['id'] = $this->db->insert_id();
+		$this->session->set_userdata($data);
+		if($data['id']) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 	public function checkevents($where=array()){
 		$where["date"] = ">=NOW()";
 		$wherestr = " WHERE ";
@@ -62,25 +86,6 @@ class Sitemodel extends CI_Model{
 		$result = $query->result();
 		return $result;
 	}
-	/************** Takes Info from the route where **************/
-	public function route_info($id){ 
-		$ret = array();
-		
-		$sql = "SELECT * FROM trails WHERE id = $id LIMIT 1";
-		$query = $this->db->query($sql);
-		$result = $query->result();
-		
-		$result = $result[0];
-		
-		$ret['info'] = $result;
-		
-		$sql = "SELECT * FROM points WHERE trail_id = $id ORDER BY id ASC";
-		$query = $this->db->query($sql);
-		$results = $query->result();
-		
-		$ret['points'] = $results;
-		
-		return $ret;
-	}
+	
 }
 ?>
