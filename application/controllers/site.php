@@ -60,6 +60,7 @@
 				$this->signup($data);
 			}else{
 				
+				$this->sitemodel->imgresize();
 				
 				$data = array('username'=>set_value('reguser'),'userimg'=>set_value('regimg'),'password'=> md5(set_value('regpass')),'email'=>set_value('regemail'),'aboutme'=>set_value('regbio'),'location'=>set_value('reglocat'));
 				if($this->sitemodel->register($data)) {
