@@ -1,5 +1,7 @@
 <?php
 class Sitemodel extends CI_Model{
+
+	var $imgpath = '';
 	/************** Check Login checks rows returned from db matched against login information from landing **************/
 	public function checklogin($email,$password){
 		$password = md5($password);
@@ -16,6 +18,32 @@ class Sitemodel extends CI_Model{
 		}
 	}
 	
+	
+	public function imgresize($sizes = null){
+		
+		$this->imgpath = realpath(APPPATH.'../uploads');
+		$config = array(
+					'allowed_types'=> 'jpg|jpeg|gif|png',
+					'upload_path'=> $this->imgpath,
+					'max_size'=> 2000);
+					
+		$this->load->library('upload',$config);
+		if(!$this->upload->do_upload()) {
+			print('<pre>');
+			print_r($this->upload->display_errors());
+			print('</pre>');
+			exit;
+		} else {
+			echo 'hi';exit;
+		}
+		$image_data = $this->upload->data();
+		
+		print('<pre>');
+		print_r($image_data);
+		print('</pre>');
+		exit;
+	}
+	
 	public function register($data){
 		$sql = $this->db->insert_string('users', $data);
 		$this->db->query($sql);
@@ -27,7 +55,18 @@ class Sitemodel extends CI_Model{
 			return false;
 		}
 	}
-	
+	public function idtousername($id = null){	
+			$query = $this->db->query("SELECT username from users WHERE id  = '$id'");
+			if($query->num_rows()){
+				$result = $query->result();
+				$result = $result[0];
+				$username = $result->username;
+				return $username;
+			}else{
+				return false;
+			}
+		}
+
 	public function createevent($data){
 		$sql = $this->db->insert_string('events', $data);
 		$this->db->query($sql);
@@ -55,6 +94,9 @@ class Sitemodel extends CI_Model{
 		if($query->num_rows()){
 			$result = $query->result();
 			$result = $result;
+			foreach($result as &$event){
+				$event->creator = $this->idtousername($event->userid);
+			}
 			return $result;
 		}else{
 			return false;
@@ -68,16 +110,6 @@ class Sitemodel extends CI_Model{
 		$query = $this->db->query("UPDATE users set  username = '$data[username]', password = '$data[password]', biography = '$data[biography]' where id = '$data[id]'");
 	}
 
-	/************** app_detail_submit takes information from the appdetail form and pushes to db **************/
-	public function app_detail_submit($data){
-		$this->load->database();
-		if($data['rflag']){
-			$query = $this->db->query("UPDATE trails set iterations = `iterations`+1 where id = '$data[trailid]'");
-		}else{
-			$query = $this->db->query("UPDATE trails set name = '$data[rname]', distance = '$data[rdist]',tags = '$data[rtag]', description = '$data[rdesc]', userid = ".$this->session->userdata('id')." where id = '$data[trailid]'");
-		}
-		
-	}
 	/************** Pulls back the userinfo associated with the user **************/
 	public function userinfo($username) {
 		$this->load->library('session');

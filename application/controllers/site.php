@@ -10,7 +10,7 @@
 		public function protect(){
 			$this->load->library('session');
 			if(!$this->session->userdata('username')){
-				redirect(base_url());
+				redirect(base_url('index.php/site/register'));
 			}
 		}
 		
@@ -43,6 +43,9 @@
 			/************** Registeration Form + Validation
 							$data: Passed to userview and sent to DB. **************/
 		public function register(){
+			$this->load->library('upload');
+			$image = $this->input->post('regimg');
+			$this->upload->do_upload($image);
 			$this->load->library('form_validation');
 			$this->load->model('sitemodel');
 			$this->form_validation->set_rules("reguser", "Username", 'required');
@@ -56,6 +59,8 @@
 				$data = array('username'=>set_value('reguser'),'userimg'=>set_value('regimg'),'password'=> md5(set_value('regpass')),'email'=>set_value('regemail'),'aboutme'=>set_value('regbio'),'location'=>set_value('reglocat'));
 				$this->signup($data);
 			}else{
+				
+				
 				$data = array('username'=>set_value('reguser'),'userimg'=>set_value('regimg'),'password'=> md5(set_value('regpass')),'email'=>set_value('regemail'),'aboutme'=>set_value('regbio'),'location'=>set_value('reglocat'));
 				if($this->sitemodel->register($data)) {
 					redirect('site/eventfind',$data);
@@ -81,7 +86,9 @@
 		
 			
 		}
+		
 		public function create($data = null){
+			$this->protect();
 			$this->load->library('form_validation');
 			$this->header();
 			$this->load->view('site/event');
@@ -97,10 +104,9 @@
 			
 			if(! $this->form_validation->run()){
 				$data = array('name'=>set_value('ename'),'image'=>set_value('eimg'),'date'=> set_value('etime'),'date'=>set_value('edate'),'description'=>set_value('edisc'),'city'=>set_value('elocat'));
-				
 			}else{
 				$datetime = date('Y-m-d',strtotime(set_value('edate'))).' '.date('g:i:s',strtotime(set_value('etime')));
-				$data = array('name'=>set_value('ename'),'image'=>set_value('eimg'),'date'=>$datetime,'description'=>set_value('edisc'),'city'=>set_value('elocat'));
+				$data = array('name'=>set_value('ename'),'image'=>set_value('eimg'),'date'=>$datetime,'description'=>set_value('edesc'),'city'=>set_value('elocat'),'userid'=>$this->session->userdata('userid'));
 				if($this->sitemodel->createevent($data)) {
 					redirect('site/eventfind');
 				} else {
@@ -185,21 +191,8 @@
 			if($this->form_validation->run()){
 				$this->find(set_value('citysearch'));
 			}
-		}
-		
-		/************** App loads application view for route tracker **************/
-		public function app(){
-			$this->protect();
-			$this->load->library('session');
-			$this->load->model('sitemodel');
-			$routes = $this->sitemodel->return_routes();
-			$data = array('routes' => $routes,'trailid' => $this->session->userdata('trailid'));
-			$this->load->view('site/loggedin_header');
-			$this->subnav();
-			$this->load->view('site/loggedin_app',$data);
-			$this->load->view('site/loggedin_footer');
-		}
-		
+		}		
+				
 			/************** Login information is checked against the database and authenticates the user as well as beginning session. **************/
 		public function login(){
 			$this->load->library('form_validation');

@@ -22,7 +22,7 @@
 		</div>
 		<div class="clearfix space">
 			<label class="reglabel">Event Description:</label>
-			<textarea class="regbio" placeholder="Tell us about the event..."  name="edisc"></textarea>
+			<textarea class="regbio" placeholder="Tell us about the event..." name="edesc"></textarea>
 		</div>
 		<div class="clearfix space">
 			<label class="reglabel">Location:</label>

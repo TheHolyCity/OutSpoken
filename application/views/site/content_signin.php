@@ -3,7 +3,7 @@
 	echo validation_errors();
 	
 	?>
-	<form class="regform" action="<?=base_url()?>index.php/site/register" method="post">
+	<form class="regform" enctype="multipart/form-data" action="<?=base_url()?>index.php/site/register" method="post">
 		<div class="clearfix space">
 			<label class="reglabel">Username:</label>
 			<input type="text" class="reguser" name="reguser" value="<?=$username?>" />
