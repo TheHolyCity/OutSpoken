@@ -43,11 +43,10 @@
 			/************** Registeration Form + Validation
 							$data: Passed to userview and sent to DB. **************/
 		public function register(){
-			$this->load->library('upload');
-			$image = $this->input->post('regimg');
-			$this->upload->do_upload($image);
+			
 			$this->load->library('form_validation');
 			$this->load->model('sitemodel');
+			
 			$this->form_validation->set_rules("reguser", "Username", 'required');
 			$this->form_validation->set_rules("regemail", "Email", 'required');
 			$this->form_validation->set_rules("regpass", "Password", 'required|matches[regrepass]');
@@ -55,17 +54,63 @@
 			$this->form_validation->set_rules('regbio','');
 			$this->form_validation->set_rules('reglocat','');
 			
-			if(! $this->form_validation->run()){
-				$data = array('username'=>set_value('reguser'),'userimg'=>set_value('regimg'),'password'=> md5(set_value('regpass')),'email'=>set_value('regemail'),'aboutme'=>set_value('regbio'),'location'=>set_value('reglocat'));
+			if(! $this->form_validation->run())
+			{
+				$data = array(
+					'username'=>set_value('reguser'),
+					'userimg'=>set_value('regimg'),
+					'password'=> md5(set_value('regpass')),
+					'email'=>set_value('regemail'),
+					'aboutme'=>set_value('regbio'),
+					'location'=>set_value('reglocat')
+				);
+				
 				$this->signup($data);
-			}else{
+			}
+			
+			else
+			{
+				// img upload
+				$config = array(
+					'allowed_types' => 'jpg|jpeg|gif|png',
+					'upload_path'   => realpath(APPPATH.'../uploads'),
+					'max_size'      => 2000,
+					'encrypy_name'  => true,
+				);
+							
+				$this->load->library('upload', $config);
 				
-				$this->sitemodel->imgresize();
+				if (! $this->upload->do_upload())
+				{
+					print('<pre>');
+					print_r($this->upload->display_errors());
+					print('</pre>');
+					exit;
+				}
 				
-				$data = array('username'=>set_value('reguser'),'userimg'=>set_value('regimg'),'password'=> md5(set_value('regpass')),'email'=>set_value('regemail'),'aboutme'=>set_value('regbio'),'location'=>set_value('reglocat'));
-				if($this->sitemodel->register($data)) {
-					redirect('site/eventfind',$data);
-				} else {
+				else
+				{
+					$upload_data = $this->upload->data();
+					$image_file = $upload_data['file_name'];
+				}
+				
+
+				
+				$data = array(
+					'username' => set_value('reguser'),
+					'userimg'  => $image_file,
+					'password' => md5(set_value('regpass')),
+					'email'    => set_value('regemail'),
+					'aboutme'  => set_value('regbio'),
+					'location' => set_value('reglocat')
+				);
+				
+				if($this->sitemodel->register($data))
+				{
+					redirect('site/eventfind', $data);
+				}
+				else
+				{
 					$this->signup($data);
 				}
 			}

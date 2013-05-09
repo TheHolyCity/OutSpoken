@@ -10,7 +10,7 @@
 		</div>
 		<div class="clearfix space">
 			<label class="reglabel">Profile image:</label>
-			<input type="file" class="regimg" name="regimg" />
+			<input type="file" class="regimg" name="userfile" />
 		</div>
 		<div class="clearfix space">
 			<label class="reglabel">Email:</label>
@@ -18,11 +18,11 @@
 		</div>
 		<div class="clearfix space">
 			<label class="reglabel">Password:</label>
-			<input type="password"	class="regpass" name="regpass" value="" />
+			<input type="password"	class="regpass" name="regpass" value="123" />
 		</div>
 		<div class="clearfix space">
 			<label class="reglabel">Retype Password:</label>
-			<input type="password" class="regrepass" name="regrepass" value="" />
+			<input type="password" class="regrepass" name="regrepass" value="123" />
 		</div>
 		<div class="clearfix space">
 			<label class="reglabel">About you:</label>
