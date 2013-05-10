@@ -149,6 +149,10 @@ header{
 	margin-left: 25px;
 }
 
+.nav {
+	width: 765px;
+}
+
 .navitem{
 	float: left;
 	width: 160px;
@@ -229,6 +233,8 @@ header{
 	width: 100px;
 	border: none;
 	clear: right;
+	margin-right:0;
+	padding-right:0;
 }
 
 .cta{
@@ -431,12 +437,7 @@ header{
 .regform .regbtn{
 	margin-left: 340px;
 	width: 80px;
-	
 }
-
-#signin{
-	width: 475px;
-}	
 .siform .silabel{
 	float: left;
 	width: 150px;

@@ -21,6 +21,7 @@ class Sitemodel extends CI_Model{
 	
 	public function register($data)
 	{
+		
 		$sql = $this->db->insert_string('users', $data);
 		$this->db->query($sql);
 		$data['id'] = $this->db->insert_id();

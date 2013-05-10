@@ -1,7 +1,8 @@
 <div id="register">
 	<?php
 	echo validation_errors();
-	
+	echo '<p>' . $this->session->flashdata('error') . '</p>';
+
 	?>
 	<form class="regform" enctype="multipart/form-data" action="<?=base_url()?>index.php/site/register" method="post">
 		<div class="clearfix space">

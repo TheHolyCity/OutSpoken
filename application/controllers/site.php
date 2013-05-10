@@ -70,6 +70,22 @@
 			
 			else
 			{
+				$this->load->library('session');
+				$data = array(
+					'username' => set_value('reguser'),
+					'password' => md5(set_value('regpass')),
+					'email'    => set_value('regemail'),
+					'aboutme'  => set_value('regbio'),
+					'location' => set_value('reglocat')
+				);
+
+				$query = $this->db->query("SELECT username,email from users WHERE username ='". set_value("reguser") ."' OR email = '". set_value("regemail")."'");
+				if($query->num_rows()){
+					$error = 'This Email or Username is already active.';
+					$this->session->set_flashdata("error", $error);
+					$this->signup($data);
+					return;
+				}
 				// img upload
 				$config = array(
 					'allowed_types' => 'jpg|jpeg|gif|png',
@@ -90,21 +106,35 @@
 				
 				else
 				{
+					
 					$upload_data = $this->upload->data();
 					$image_file = $upload_data['file_name'];
+					$data['userimg'] = $image_file;
+					$config = array(
+						'source_image'  => realpath(APPPATH . '../uploads') . '/' . $image_file,
+						'new_image'		=> realpath(APPPATH.'../uploads') . '/' . $image_file,
+						'create_thumb'	=> true,
+						'width'			=> '100',
+						'height'		=> '100',
+						'master_dim'	=> 'auto',
+						'allowed_types' => 'jpg|jpeg|gif|png',
+						'upload_path'   => realpath(APPPATH.'../uploads'),
+						'max_size'      => 2000,
+						'encrypy_name'  => true,
+					
+					);
+					
+					$this->load->library('image_lib',$config);
+				
+					if ( ! $this->image_lib->resize())
+						{
+						    echo $this->image_lib->display_errors();
+						}
 				}
 				
 
 				
-				$data = array(
-					'username' => set_value('reguser'),
-					'userimg'  => $image_file,
-					'password' => md5(set_value('regpass')),
-					'email'    => set_value('regemail'),
-					'aboutme'  => set_value('regbio'),
-					'location' => set_value('reglocat')
-				);
-				
+								
 				if($this->sitemodel->register($data))
 				{
 					redirect('site/eventfind', $data);
