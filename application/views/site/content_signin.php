@@ -1,10 +1,11 @@
-<div id="register">
 	<?php
 	echo validation_errors();
 	echo '<p>' . $this->session->flashdata('error') . '</p>';
 
 	?>
-	<form class="regform" enctype="multipart/form-data" action="<?=base_url()?>index.php/site/register" method="post">
+<div id="regbox">
+	<h2>Register</h2>
+	<form id="regform" enctype="multipart/form-data" action="<?=base_url()?>index.php/site/register" method="post">
 		<div class="clearfix space">
 			<label class="reglabel">Username:</label>
 			<input type="text" class="reguser" name="reguser" value="<?=$username?>" />
@@ -40,7 +41,7 @@
 	</form>
 </div><!-- register div closed -->
 
-<div id="signinform">
+<div id="signinbox" class="clearfix">
 	<form class="siform" action="<?=base_url()?>/index.php/site/login" method="post">
 		<div class="clearfix space">
 			<label class="silabel">Email:</label>

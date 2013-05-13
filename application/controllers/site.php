@@ -98,10 +98,9 @@
 				
 				if (! $this->upload->do_upload())
 				{
-					print('<pre>');
-					print_r($this->upload->display_errors());
-					print('</pre>');
-					exit;
+					
+					$this->upload->display_errors();
+					
 				}
 				
 				else
@@ -137,7 +136,7 @@
 								
 				if($this->sitemodel->register($data))
 				{
-					redirect('site/eventfind', $data);
+					redirect('site/profile', $data);
 				}
 				else
 				{
@@ -145,7 +144,75 @@
 				}
 			}
 		}
-		/************** Functionality for the edit user form  **************/ 
+		public function gallery(){
+			$data["id"] = $this->session->userdata('id');
+			$this->load->model('sitemodel', $data);
+			$this->sitemodel('gallery');
+		}
+		public function galleryupload()
+		{
+			
+			
+			$config = array(
+					'allowed_types' => 'jpg|jpeg|gif|png',
+					'upload_path'   => realpath(APPPATH.'../uploads'),
+					'max_size'      => 2000,
+					'encrypy_name'  => true,
+				);
+				$this->load->model('sitemodel');
+				$this->load->library('session');			
+				$this->load->library('upload', $config);
+				
+				if (! $this->upload->do_upload())
+				{
+					
+					$this->upload->display_errors();
+					
+				}
+				
+				else
+				{
+					
+					$upload_data = $this->upload->data();
+					$image_file = $upload_data['file_name'];
+					$data['userid'] = $this->session->userdata('id');
+					$data['name'] = $image_file;
+					$config = array(
+						'source_image'  => realpath(APPPATH . '../uploads') . '/' . $image_file,
+						'new_image'		=> realpath(APPPATH.'../uploads') . '/' . $image_file,
+						'create_thumb'	=> true,
+						'width'			=> '100',
+						'height'		=> '100',
+						'master_dim'	=> 'auto',
+						'allowed_types' => 'jpg|jpeg|gif|png',
+						'upload_path'   => realpath(APPPATH.'../uploads'),
+						'max_size'      => 2000,
+						'encrypy_name'  => true,
+					
+					);
+					
+					$this->load->library('image_lib',$config);
+				
+					if ( ! $this->image_lib->resize())
+						{
+						    echo $this->image_lib->display_errors();
+						}
+						
+					if($this->sitemodel->profilegallery($data))
+						{
+							redirect('site/profile', $data);
+						}
+						else
+						{
+							$this->signup($data);
+						}
+
+					
+					
+				}
+			}
+		
+		
 		public function edituser(){
 			$this->protect();
 			$data = array("id" => $this->session->userdata("id"),
@@ -159,9 +226,8 @@
 			$this->session->set_userdata($data);
 			redirect('site/userview');
 			
-		
-			
 		}
+		
 		
 		public function create($data = null){
 			$this->protect();
@@ -193,9 +259,17 @@
 		}
 		
 		public function profile(){
+			$events = $galleryimgs = $data = array();
+			$events["id"] ="=". $this->session->userdata("id");
 			$this->header();
-			
+			$this->load->model("sitemodel");
 			$data = $this->session->all_userdata();
+			$data["events"] = $this->sitemodel->checkevents($events);
+			$galleryimgs = array("userid" => $data['id']);
+			$data["galleryimgs"] = $this->sitemodel->gallery($galleryimgs);
+			
+			
+			
 			
 			$this->load->view('site/profile',$data);
 			$this->load->view('site/footer');
@@ -286,7 +360,7 @@
 				$password = set_value('sipass');
 				
 				if($this->sitemodel->checklogin($email,$password)){
-					redirect('site/eventfind');
+					redirect('site/find');
 				}else{
 					$this->session->set_flashdata('login', 'Login information is incorrect');
 					$this->home();

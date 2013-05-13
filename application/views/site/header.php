@@ -3,6 +3,8 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<link rel="stylesheet" href="<?= base_url()?>css/web.css" media="screen" />
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+		<script src="<?= base_url()?>js/fancybox/jquery.fancybox-1.3.4.js"></script>
 		<title>Out.Spoken</title>
 	</head>
 	<body>

@@ -81,6 +81,33 @@ class Sitemodel extends CI_Model{
 			return false;
 		}
 	}
+	
+	public function profilegallery($data)
+	{
+		$sql = $this->db->insert_string('gallery', $data);
+		$this->db->query($sql);
+		$data['id'] = $this->db->insert_id();
+		$this->session->set_userdata($data);
+
+		return isset($data['id']);
+	}
+	
+	public function gallery($data){
+		$query = $this->db->query("SELECT * from gallery WHERE userid = $data[userid] ORDER BY created DESC");
+		$result = $query->result();
+		foreach($result as &$r){
+			$r->thumb=$this->imgthumb($r->name);
+		}
+		return $result;
+			
+	}
+	
+	public function imgthumb($name){
+		$name = explode(".",$name);
+		$name[(sizeof($name)-2)].="_thumb";
+		$name = implode(".",$name);
+		return $name;
+	}
 
 	/************** CRUD from useredit functionality passed from edit user panel **************/
 	public function updateuser($data){
@@ -97,6 +124,7 @@ class Sitemodel extends CI_Model{
 		$result = $query->result();
 		return $result;
 	}
+	
 	
 }
 ?>

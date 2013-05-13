@@ -150,7 +150,7 @@ header{
 }
 
 .nav {
-	width: 765px;
+	width: 780px;
 }
 
 .navitem{
@@ -230,7 +230,7 @@ header{
 	font-size: 25px;
 	padding-top: 35px;
 	padding: 35px 20px 0 35px;
-	width: 100px;
+	width: 105px;
 	border: none;
 	clear: right;
 	margin-right:0;
@@ -401,24 +401,26 @@ header{
 
 												/************** Signin and Register **************/
 
-.register{
+#regbox{
+	float: left;
+	width: 475px;
+}
+#signinbox{
 	float: left;
 	width: 475px;
 }											
-.regform{
+#regform{
 	margin-top: 10px;
-	width: 50%;
 	
 }
-.regform label{
+#regform .reglabel{
 	float: left;
 	width: 150px;
 	margin-left: 10px;
 	color: #A90641;
 	font-size: 15px;
-	font-weight: bold;
 }
-.regform input{
+#regform input{
 	float: left;
 	margin-left: 25px;
 	width: 225px;
@@ -427,14 +429,16 @@ header{
 .space{
 	margin-top:15px;
 }
-.regform .regimg{
+#regform .regimg{
+	float: left;
+	margin-left: 25px;
 	width: 300px;
 }
-.regform .regbio{
+#regform .regbio{
 	width: 230px;
 	margin-left: 25px;
 }
-.regform .regbtn{
+#regform .regbtn{
 	margin-left: 340px;
 	width: 80px;
 }
