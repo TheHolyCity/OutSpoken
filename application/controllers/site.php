@@ -149,6 +149,8 @@
 			$this->load->model('sitemodel', $data);
 			$this->sitemodel('gallery');
 		}
+		
+		
 		public function galleryupload()
 		{
 			
@@ -208,10 +210,10 @@
 						}
 
 					
-					
 				}
 			}
 		
+
 		
 		public function edituser(){
 			$this->protect();
@@ -231,12 +233,16 @@
 		
 		public function create($data = null){
 			$this->protect();
+			$this->load->library('session');			
 			$this->load->library('form_validation');
 			$this->header();
-			$this->load->view('site/event');
+			$this->load->model('sitemodel');
+			$data = array();
+			$default_time = $this->sitemodel->times();
+			$data['default_times'] = $default_time;
+			$this->load->view('site/event',$data);
 			$this->load->view('site/footer');
 			
-			$this->load->model('sitemodel');
 			$this->form_validation->set_rules("ename", 'required');
 			$this->form_validation->set_rules("eimg", '');
 			$this->form_validation->set_rules("etime", 'required');
@@ -245,18 +251,98 @@
 			$this->form_validation->set_rules('elocat','required');
 			
 			if(! $this->form_validation->run()){
-				$data = array('name'=>set_value('ename'),'image'=>set_value('eimg'),'date'=> set_value('etime'),'date'=>set_value('edate'),'description'=>set_value('edisc'),'city'=>set_value('elocat'));
+				$data = array(
+				'name'=>set_value('ename'),
+				'image'=>set_value('eimg'),
+				'date'=> set_value('etime'),
+				'date'=>set_value('edate'),
+				'description'=>set_value('edisc'),
+				'city'=>set_value('elocat'),
+				'default_times' => $default_time);
+		
+								
 			}else{
-				$datetime = date('Y-m-d',strtotime(set_value('edate'))).' '.date('g:i:s',strtotime(set_value('etime')));
-				$data = array('name'=>set_value('ename'),'image'=>set_value('eimg'),'date'=>$datetime,'description'=>set_value('edesc'),'city'=>set_value('elocat'),'userid'=>$this->session->userdata('userid'));
+				$time = set_value('etime');
+				if(strstr($time,'PM')) {
+					$raw = str_replace(' PM','',$time);
+					$raw = explode(':',$raw);
+					$raw[0] += 12;
+					$raw = implode(':',$raw);
+					$time = $raw;
+					$is_pm = true;
+				}
+							
+				$datetime = date('Y-m-d',strtotime(set_value('edate'))).' '.date('H:i:s',strtotime($time));
+				
+				$data = array(
+					'name'=>set_value('ename'),
+					'image'=>set_value('eimg'),
+					'date'=>$datetime,
+					'description'=>set_value('edesc'),
+					'city'=>set_value('elocat'),
+					'userid'=>$this->session->userdata('id'),
+					'default_times' => $default_time
+				);
+												
+				//imgupload
+					
+				$config = array(
+					'allowed_types' => 'jpg|jpeg|gif|png',
+					'upload_path'   => realpath(APPPATH.'../uploads'),
+					'max_size'      => 2000,
+					'encrypy_name'  => true,
+				);
+				
+				$this->load->model('sitemodel');
+				$this->load->library('upload', $config);
+				
+				if (! $this->upload->do_upload())
+				{
+					
+					$this->upload->display_errors();
+					
+				}
+				
+				else
+				{
+					
+					$upload_data = $this->upload->data();
+					$image_file = $upload_data['file_name'];
+					$data['userid'] = $this->session->userdata('id');
+					$data['image'] = $image_file;
+					$config = array(
+						'source_image'  => realpath(APPPATH . '../uploads') . '/' . $image_file,
+						'new_image'		=> realpath(APPPATH.'../uploads') . '/' . $image_file,
+						'create_thumb'	=> true,
+						'width'			=> '100',
+						'height'		=> '100',
+						'master_dim'	=> 'auto',
+						'allowed_types' => 'jpg|jpeg|gif|png',
+						'upload_path'   => realpath(APPPATH.'../uploads'),
+						'max_size'      => 2000,
+						'encrypy_name'  => true,
+					
+					);
+					
+					$this->load->library('image_lib',$config);
+				
+					if ( ! $this->image_lib->resize())
+						{
+						    echo $this->image_lib->display_errors();
+						}
+					
+				}
 				if($this->sitemodel->createevent($data)) {
-					redirect('site/eventfind');
+					redirect('site/find');
 				} else {
 					$this->signup($data);
 				}
 			}
 			
+			
+			
 		}
+		
 		
 		public function profile(){
 			$events = $galleryimgs = $data = array();
@@ -326,6 +412,7 @@
 				$search = array("city"=>"= '$params'");
 			}
 			$events = $this->sitemodel->checkevents($search);
+			$this->sitemodel->times();
 			$data = array('events' => $events);
 			$this->header();
 			$this->load->view('site/find',$data);

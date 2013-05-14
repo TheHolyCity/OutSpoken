@@ -2,15 +2,18 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<link rel="stylesheet" href="<?= base_url()?>css/blitzer/jqueryui.min.css" media="screen" />
 		<link rel="stylesheet" href="<?= base_url()?>css/web.css" media="screen" />
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+		<script src="<?= base_url()?>js/jqueryui.min.js"></script>
 		<script src="<?= base_url()?>js/fancybox/jquery.fancybox-1.3.4.js"></script>
+		<script src="<?= base_url()?>js/site.js"></script>
 		<title>Out.Spoken</title>
 	</head>
 	<body>
 		<div id="wrapper">
 			<header>
-				<div id="branding"></div> <!-- Branding div close -->
+				<div id="branding"><a href="<?=base_url()?>/index.php">Outspoken</a></div> <!-- Branding div close -->
 				<div class="nav clearfix">
 					
 					<div id="findbox" class="navitem">

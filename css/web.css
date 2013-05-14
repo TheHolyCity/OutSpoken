@@ -139,7 +139,7 @@ header{
 	border-bottom: thick solid #F2F2F2;
 	display: block;
 }
-#branding{
+#branding a{
 	background: url('../images/brand.jpg') center no-repeat;
 	width: 224px;
 	height: 65px;
@@ -147,6 +147,7 @@ header{
 	float:left;
 	margin-right: 45px;
 	margin-left: 25px;
+	text-indent: -9999px;
 }
 
 .nav {
