@@ -342,7 +342,10 @@ header{
 }
 .content{
 	border-top: thin solid #b8b8b8;
+	margin-bottom:20px;
 }
+
+
 .eventhead{
 	background-color: #888888;
 }
@@ -351,13 +354,13 @@ header{
 	height: 315px
 	width: 100%;
 	background-color: #888888;
-
 }
 
 .eventitem{
-	width: 300px;
+	width: 308px;
 	margin-left: 25px;
 	float: left;
+	color: #fff;
 }
 
 .eventimg{
@@ -366,22 +369,24 @@ header{
 	background: url('../images/eventimg.jpg') top no-repeat;
 }
 
+/*
 .eventdate{
 	 float: left;
 	 width: 256px;
 	 color: white; 
 	 font: bold 24px/45px Arial, Sans-Serif; 
 	 letter-spacing: -1px;  
-	 background: rgb(0, 0, 0); /* fallback color */
+	 background: rgb(0, 0, 0);
 	 background: rgba(0, 0, 0, 0.5);
 	 padding: 10px; 
 	 font-size: .9em;
 	 margin-top: -110px;
  }
+*/
  
 .eventname{
-	width:300px;
-	display: block;
+/* 	width:300px; */
+/* 	display: block; */
 	color: #fff;
 }
 
@@ -518,4 +523,26 @@ header{
 
 .rattend{
 
+}
+
+.event_img {
+	float: left;
+	width: 100px;
+	height:100px;
+	background:#ccc;
+}
+
+.eventdate {
+	float:left;
+}
+
+.clear {
+	clear:both;
+}
+.eventdate_wrapper {
+	float: left;
+    height: 62px;
+    width: 202px;
+    height: 100px;
+    background: #333;
 }

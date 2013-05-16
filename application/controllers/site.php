@@ -16,10 +16,13 @@
 		
 		public function home(){
 				$this->load->model('sitemodel');
+				$topevents = $this->sitemodel->topevents();
+				$data = array("events" => $topevents);
 				$this->load->library('form_validation');
 				$this->header();
-				$this->load->view('site/content_landing');
+				$this->load->view('site/content_landing', $data);
 				$this->load->view('site/footer');
+				
 		}
 		
 		public function header(){

@@ -15,9 +15,20 @@
 			<section class="content">
 				<h2 class="eventhead">Top Events</h2>
 				<ul class="topevents clearfix">
+				<?					
+				foreach($events as $e){
+					?>
 					<li class="eventitem">
-						<div class="eventimg"></div>
-						<p class="eventdate"> 4/25/13 <a href="#" class="eventname">Orlando Gangout Come Ride with friends ...</a></p>
+						<div class="event_img"><img src="<?=base_url().'uploads/'.$e->thumb?>" /></div>
+						<div class="eventdate_wrapper"><p class="eventdate"><?=date('m/d/Y', strtotime($e->date))?><br><a href="#" class="eventname"><?=$e->name?></a></p></div>
+						<div class="clear"></div>
 					</li> <!-- Eventitem Close -->
+				<? }?>
 				</ul> <!-- Events div closed -->
+				
+				<div class="clear"></div>
+				
+					
+						
+					
 			</section>

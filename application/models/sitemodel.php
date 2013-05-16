@@ -30,6 +30,34 @@ class Sitemodel extends CI_Model{
 		return isset($data['id']);
 	}
 	
+	public function topevents(){
+		$events = $this->checkevents();
+		$total_events = 4;
+		$eventids = $return = $returnevents = array();
+		foreach($events as $eventid){
+			$eventids[] = $eventid->id;
+			
+		}
+		$eventids = implode(',',$eventids);
+		$sql = "SELECT COUNT(id) AS rsvp FROM event_users  WHERE eventid IN($eventids) GROUP BY eventid LIMIT $total_events";
+		$query = $this->db->query($sql);
+		
+		$result = $query->result();
+		foreach($result as $r){
+			$return[] = $r->rsvp;
+			 
+		}
+		if($return){
+			foreach($return as $re){
+				$returnevents[] = $this->checkevents("id=$re");
+			}
+		}else{
+			$returnevents = $this->checkevents(null,$total_events);
+		}
+		return $returnevents;
+		
+	}
+	
 	
 	
 	public function idtousername($id = null)
@@ -97,9 +125,12 @@ class Sitemodel extends CI_Model{
 			
 	}
 	
-	public function checkevents($where=array()){
+	public function checkevents($where=array(), $limit = 6){
 		$where["date"] = ">=NOW()";
 		$wherestr = " WHERE ";
+		if($limit){
+			$limit = " LIMIT $limit";
+		}
 		$i=0;
 		foreach($where as $k=>$v){
 			$wherestr.="$k $v";
@@ -108,7 +139,7 @@ class Sitemodel extends CI_Model{
 				$wherestr.= " and ";
 			}
 		}
-		$query = $this->db->query("SELECT * from events".($where? $wherestr:"")." ORDER BY date DESC");
+		$query = $this->db->query("SELECT * from events".($where? $wherestr:"")." ORDER BY date DESC $limit");
 		if($query->num_rows()){
 			$result = $query->result();
 			$result = $result;
