@@ -2,8 +2,7 @@
 class Sitemodel extends CI_Model{
 
 	/************** Check Login checks rows returned from db matched against login information from landing **************/
-	public function checklogin($email,$password)
-	{
+	public function checklogin($email,$password) {
 		$password = md5($password);
 		$query = $this->db->query("SELECT * from users WHERE password = '$password' AND email = '$email'");
 		$this->load->library('session');
@@ -13,15 +12,11 @@ class Sitemodel extends CI_Model{
 			$this->session->set_userdata($result);
 			return true;
 		}else{
-	
 			return false;
 		}
 	}
 	
-	
-	public function register($data)
-	{
-		
+	public function register($data) {
 		$sql = $this->db->insert_string('users', $data);
 		$this->db->query($sql);
 		$data['id'] = $this->db->insert_id();
@@ -32,36 +27,29 @@ class Sitemodel extends CI_Model{
 	
 	public function topevents(){
 		$events = $this->checkevents();
+		
 		$total_events = 4;
 		$eventids = $return = $returnevents = array();
-		foreach($events as $eventid){
+		foreach($events as $eventid) {
 			$eventids[] = $eventid->id;
-			
 		}
-		$eventids = implode(',',$eventids);
-		$sql = "SELECT COUNT(id) AS rsvp FROM event_users  WHERE eventid IN($eventids) GROUP BY eventid LIMIT $total_events";
+		/*
+$eventids = implode(',',$eventids);
+		$sql = "SELECT COUNT(id) AS rsvp FROM event_users WHERE eventid IN($eventids) GROUP BY eventid LIMIT $total_events";
 		$query = $this->db->query($sql);
 		
 		$result = $query->result();
 		foreach($result as $r){
-			$return[] = $r->rsvp;
-			 
+			$rsvpd = $r;
 		}
-		if($return){
-			foreach($return as $re){
-				$returnevents[] = $this->checkevents("id=$re");
-			}
-		}else{
-			$returnevents = $this->checkevents(null,$total_events);
-		}
-		return $returnevents;
+*/
 		
+		$returnevents = $this->checkevents(array(),$total_events);
+		
+		return $returnevents;
 	}
 	
-	
-	
-	public function idtousername($id = null)
-	{
+	public function idtousername($id = null) {
 		$query = $this->db->query("SELECT username from users WHERE id  = '$id'");
 		if($query->num_rows()){
 			$result = $query->result();
@@ -73,18 +61,46 @@ class Sitemodel extends CI_Model{
 		}
 	}
 	
-
 	public function createevent($data){
 		unset($data['default_times']);
-		$sql = $this->db->insert_string('events', $data);
-		$this->db->query($sql);
-		$data['id'] = $this->db->insert_id();
-		$this->session->set_userdata($data);
+		
+		if(!$data['image']) { unset($data['image']);}
+		
+		if($data['eid']) {
+			$id = $data['eid'];
+			$this->db->where('id',$id);
+			unset($data['eid']);
+			$this->db->update('events',$data);
+			$data['id'] = $id;
+		} else {
+			$sql = $this->db->insert_string('events', $data);
+			$this->db->query($sql);
+			$data['id'] = $this->db->insert_id();
+		}
+		//$this->session->set_userdata($data);
 		if($data['id']) {
 			return true;
 		} else {
 			return false;
 		}
+	}
+	
+	public function get_event($id = null) {
+		$query = $this->db->query('SELECT * FROM events WHERE id = ' . $id);
+		if($query->num_rows()) {
+			$result = $query->result();
+			$result = $result[0];
+			$result = (array)$result;
+			
+			$date = explode(' ',$result['date']);
+			
+			$result['etime'] = $date[1];
+			$result['edate'] = $date[0];
+			
+		} else {
+			$result = 'This event doesn\'t exist.';
+		}
+		return $result;
 	}
 	
 	public function pad($str = null, $length = 2) {
@@ -101,7 +117,8 @@ class Sitemodel extends CI_Model{
 	}
 	
 	public function times() {
-		$hours = array(12,1,2,3,4,5,6,7,8,9,10,11);
+		/*
+$hours = array(12,1,2,3,4,5,6,7,8,9,10,11);
 		$master_list = $minutes = array();
 		$interval = 15;
 		$appends = array('PM','AM');
@@ -109,7 +126,7 @@ class Sitemodel extends CI_Model{
 		for($i = 0; $i < 4; $i++) {
 			$minutes[] = ($i * $interval);
 		}
-		
+	
 		foreach($appends as $append) {
 			foreach($hours as $hour) {
 				foreach($minutes as $minute) {
@@ -120,9 +137,22 @@ class Sitemodel extends CI_Model{
 					$str = '';
 				}
 			}
-		}		
+		}
+*/
+		
+		$master_list = array();
+		
+		$hours 	 = array(12,1,2,3,4,5,6,7,8,9,10,11);
+		$minutes = array('00','15','30','45');
+		$ampm	 = array('AM','PM');
+		
+		$master_list = array(
+			'hours'   => $hours,
+			'minutes' => $minutes,
+			'ampm'	  => $ampm
+		);
+		
 		return $master_list;
-			
 	}
 	
 	public function checkevents($where=array(), $limit = 6){
@@ -131,36 +161,42 @@ class Sitemodel extends CI_Model{
 		if($limit){
 			$limit = " LIMIT $limit";
 		}
+				
 		$i=0;
 		foreach($where as $k=>$v){
 			$wherestr.="$k $v";
 			$i++;
 			if($i<sizeof($where)){
-				$wherestr.= " and ";
+				$wherestr.= " AND ";
 			}
 		}
-		$query = $this->db->query("SELECT * from events".($where? $wherestr:"")." ORDER BY date DESC $limit");
+	
+		$query = $this->db->query("SELECT * from events".($wherestr ? $wherestr:"")." ORDER BY date DESC $limit");
 		if($query->num_rows()){
 			$result = $query->result();
 			$result = $result;
 			foreach($result as &$event){
+				$event->editable = $this->is_users_event($event->id);
 				$event->creator = $this->idtousername($event->userid);
 				$event->thumb = ($event->image ? $this->imgthumb($event->image) : '');
+				$event->med = ($event->image ? $this->imgthumb($event->image,'_med') : '');
+				
+				$query2 = $this->db->query("SELECT * FROM event_users WHERE eventid = '" . $event->id . "'");
+				$event->rsvpd = $query2->num_rows();
 			}
+			
 			return $result;
 		}else{
 			return false;
 		}
 	}
 	
-	public function profilegallery($data)
-	{
+	public function profilegallery($data) {
 		$sql = $this->db->insert_string('gallery', $data);
 		$this->db->query($sql);
-		$data['id'] = $this->db->insert_id();
+		$data['event']['id'] = $this->db->insert_id();
 		$this->session->set_userdata($data);
-
-		return isset($data['id']);
+		return isset($data['event']['id']);
 	}
 	
 	public function gallery($data){
@@ -170,33 +206,38 @@ class Sitemodel extends CI_Model{
 			$r->thumb=$this->imgthumb($r->name);
 		}
 		return $result;
-			
 	}
 	
-	public function imgthumb($name){
-
+	public function imgthumb($name = null, $append = '_thumb'){
+		if(!$name) {return;}
 		$name = explode(".",$name);
-		$name[(sizeof($name)-2)].="_thumb";
+		$name[(sizeof($name)-2)].= $append;
 		$name = implode(".",$name);
 		return $name;
 	}
 
-	/************** CRUD from useredit functionality passed from edit user panel **************/
-	public function updateuser($data){
-		$this->load->database();
-		$data['password'] = md5($data['password']);
-		$query = $this->db->query("UPDATE users set  username = '$data[username]', password = '$data[password]', biography = '$data[biography]' where id = '$data[id]'");
+	public function userupdate($data){
+		//$query = $this->db->query("UPDATE users SET password,city,about, WHERE userid = $data[userid]")
 	}
-
-	/************** Pulls back the userinfo associated with the user **************/
-	public function userinfo($username) {
+	
+	public function rsvp($id = null, $add = true) {
+		
+	}
+	
+	public function is_users_event($id = null) {
+		if(!$id || !$this->session->userdata('id')) { return false;}
+		
 		$this->load->library('session');
-		$this->load->database();
-		$query = $this->db->query("SELECT id,email,biography FROM users WHERE username = '" . $username . "'");
-		$result = $query->result();
-		return $result;
+		
+		$user_id = $this->session->userdata('id');
+		
+		$query = $this->db->query('SELECT * FROM events WHERE userid = ' . $user_id . ' AND id = ' . $id);
+		
+		if($query->num_rows()){
+			return true;
+		} else {
+			return false;
+		}
 	}
-	
-	
 }
 ?>

@@ -33,6 +33,7 @@ blockquote, q {
 	quotes: none;
 }
 
+
 /* remember to define focus styles! */
 :focus {
 	outline: 0;
@@ -70,41 +71,20 @@ a{
 
 }
 @font-face {
-    font-family: 'Notice1';
-    src: url('../fonts/notice/NoticeStd-webfont.eot');
-    src: url('../fonts/notice/NoticeStd-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/notice/NoticeStd-webfont.woff') format('woff'),
-         url('../fonts/notice/NoticeStd-webfont.ttf') format('truetype'),
-         url('../fonts/notice/NoticeStd-webfont.svg#NoticeNotice') format('svg');
+    font-family: 'PacificoRegular';
+    src: url('../fonts/pacifico/Pacifico-webfont.eot');
+    src: url('../fonts/pacifico/Pacifico-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/pacifico/Pacifico-webfont.woff') format('woff'),
+         url('../fonts/pacifico/Pacifico-webfont.ttf') format('truetype'),
+         url('../fonts/pacifico/Pacifico-webfont.svg#PacificoRegular') format('svg');
     font-weight: normal;
     font-style: normal;
 
 }
 
-@font-face {
-    font-family: 'Notice2';
-    src: url('../fonts/notice/Notice2Std-webfont.eot');
-    src: url('../fonts/notice/Notice2Std-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/notice/Notice2Std-webfont.woff') format('woff'),
-         url('../fonts/notice/Notice2Std-webfont.ttf') format('truetype'),
-         url('../fonts/notice/Notice2Std-webfont.svg#NoticeNotice2') format('svg');
-    font-weight: normal;
-    font-style: normal;
-
+.pacific{
+	 font-family: 'PacificoRegular';
 }
-
-@font-face {
-    font-family: 'NoticeNotice3';
-    src: url('../fonts/notice/Notice3Std-webfont.eot');
-    src: url('../fonts/notice/Notice3Std-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/notice/Notice3Std-webfont.woff') format('woff'),
-         url('../fonts/notice/Notice3Std-webfont.ttf') format('truetype'),
-         url('../fonts/notice/Notice3Std-webfont.svg#NoticeNotice3') format('svg');
-    font-weight: normal;
-    font-style: normal;
-
-}
-
 .clearfix:before,
 .clearfix:after {
   content: ".";
@@ -124,11 +104,17 @@ a{
 												/************** Home & Generic Classes **************/
 .ab{
 font-family: Arial;
-font-weight: bold;
+font-weight: bolder;
 }
 
 .clear{
 clear: both;
+}
+
+.shadow{
+	-webkit-box-shadow:  5px 2px 8px 1px ;
+        
+        
 }
 
 #wrapper{
@@ -151,7 +137,7 @@ header{
 }
 
 .nav {
-	width: 780px;
+	width: 909px;
 }
 
 .navitem{
@@ -168,7 +154,7 @@ header{
 						
 #nav{
 	height: 100px;
-	width: 730px;
+	width: 850px;
 }
 
 .subdesc{
@@ -224,6 +210,29 @@ header{
 	background-color: #A90641;
 	color: #fff;
 }
+#profilebox{
+	border-right: solid 1px #F2F2F2;
+	line-height: 9.5px;
+}
+#profileview{
+	line-height: 0.5;
+	height: 65px;
+	color: #A90641;
+	font-size: 25px;
+	width: 124px;
+	border: none;
+	margin-right:0;
+	padding-right:0;
+	float: left;
+	text-align: center;
+	text-indent: -41px;
+}
+#profileview:hover{
+	border-right: thick solid #910614;
+	background-color: #A90641;
+	color: #fff;
+}
+
 
 #signin {
 	height: 65px;
@@ -237,7 +246,18 @@ header{
 	margin-right:0;
 	padding-right:0;
 }
-
+#signout{
+	height: 65px;
+	color: #A90641;
+	font-size: 25px;
+	padding-top: 35px;
+	padding: 35px 20px 0 35px;
+	width: 105px;
+	border: none;
+	margin-right:0;
+	padding-right:0;
+	float: left;
+}
 .cta{
 	background: url('../images/ctarepeat.jpg') left repeat-x;
 	position: relative;
@@ -281,6 +301,7 @@ header{
 	width: 375px;
 	line-height: 65px;
 }
+
 .ctahead .ats{
 	font-family: 'across_the_starsregular';
 	font-weight:normal;
@@ -290,41 +311,47 @@ header{
 	letter-spacing: 4px;
 	
 }
-.symone{
-	 font-family: 'Notice1'; 
-	 position: absolute;
-	 margin-top: 275px;
-	 font-size: 120px;
-	 /*left:20%;*/
-	 z-index: 2;
-	 color: #A90641;
-	 margin-left: -15px
-}
 
-.symtwo{
-	font-family: 'Notice2'; 
-	z-index: 2;
-	position: absolute;
-	color: #A90641; 
-	margin-top: 275px;
-	margin-left: 330px;
-	/*left:48%;*/
-	font-size: 120px;
+
+
+.signupcta span{
+	margin-right: 20px;
+	font-weight: bold;
 }
-.symthr{
-	font-family: 'Notice1'; 
-	 position: absolute;
-	 z-index: 2;
-	 margin-top: 275px;
-	 margin-left: 655px;
-	 color: #A90641; 
-	/*left:55%;*/
-	 font-size: 120px;
+.btnp{
+	float: left;
+	margin-top: 70px;
+}
+.ctabtn{
+	letter-spacing: .1em;
+	margin-top: 60px;
+	margin-left: 10px;
+    display: inline-block;
+    padding: 5px 6px 10px 6px;
+    color: #fff;
+    background-color: #A90641;
+    text-decoration: none;
+    font-weight: 500;
+    border-radius: 5px;
+    
+    line-height: 1.2;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-box-shadow: 4px 2px 7px 1px  #999;
+   	-webkit-box-shadow:  4px 2px 7px 1px ;
+        box-shadow:  4px 2px 7px 1px ;
+    text-shadow: 0 -1px 1px #222;
+    border-bottom: 1px solid #222;
+    position: relative;
+    text-align: center;
+    cursor: pointer;
+    width: 260px;
+    box-shadow:  5px 2px 8px 1px ;
 }
 
 .ctasub{
 	position: absolute;
-	margin-top: 380px;
+	margin-top: 265px;
 	z-index: 2;
 	color: #333333;
 	font-size: 25px;
@@ -351,7 +378,7 @@ h2 {
 }
 .content{
 	border-top: thin solid #b8b8b8;
-	margin-bottom:20px;
+/* 	margin-bottom:20px; */
 }
 
 
@@ -361,46 +388,34 @@ h2 {
 .topevents{
 	width: 100%;
 	height: 315px
-	width: 100%;
 	background-color: #888888;
+	padding-bottom: 20px;
 }
 
 .eventitem{
-	width: 308px;
+/* 	height: 375px; */
+	width: 275px;
 	margin-left: 25px;
 	float: left;
 	color: #fff;
+	margin-top:22px;
 }
 
 .eventimg{
-	width: 277px;
-	height: 244px;
+	width: 275px;
+	height: 375px;
 	background: url('../images/eventimg.jpg') top no-repeat;
 }
 
-/*
-.eventdate{
-	 float: left;
-	 width: 256px;
-	 color: white; 
-	 font: bold 24px/45px Arial, Sans-Serif; 
-	 letter-spacing: -1px;  
-	 background: rgb(0, 0, 0);
-	 background: rgba(0, 0, 0, 0.5);
-	 padding: 10px; 
-	 font-size: .9em;
-	 margin-top: -110px;
- }
-*/
- 
-.eventname{
-/* 	width:300px; */
-/* 	display: block; */
-	color: #fff;
+.eventdate, .ersvp, .eventdesc{
+	font-size: .6em;
+}
+.eventdate p{
+	color:#fff;
 }
 
-.eventname:hover{
-	color: #A90641;
+eventdate_wrapper p{
+	margin-left: 15px;
 }
 
 #footer{
@@ -414,15 +429,25 @@ h2 {
 	background-color: #A90641;
 }
 
+		
+		
 												/************** Signin and Register **************/
+.susi{
+	width: 100%;
+	
+}
 #regbox {
-	margin-right: 100px;
+	margin-right: 50px;
 }
 
 #signinbox, #regbox{
 	float: left;
 	width: 407px;
-}											
+}
+#signinbox{
+	height: 150px;
+	background-color:#f0f0f0;
+}										
 #regform{
 	margin-top: 10px;
 	
@@ -433,6 +458,11 @@ h2 {
 /* 	margin-left: 10px; */
 	color: #A90641;
 	font-size: 15px;
+}
+#susi{
+	width:100%;
+	height: 130px;
+	background-color: #f0f0f0;
 }
 #regform input{
 	float: left;
@@ -504,6 +534,7 @@ h2 {
 	height: 100px;
 	border-bottom: thin solid #000;
 	font-family: Arial,Helvetica,sans-serif;
+	padding: 10px 10px 10px 0;
 }
 
 /************** Result content **************/
@@ -536,18 +567,17 @@ h2 {
 	float: left;
 }
 
-.revent{
-
-}
-
-.rattend{
-
+.eventname {
+	color: #333;
+	font-size: 24px;
+	font-weight: bold;
+	margin-bottom: 7px;
 }
 
 .event_img {
 	float: left;
-	width: 100px;
-	height:100px;
+	width: 275px;
+	height:275px;
 	background:#ccc;
 }
 
@@ -555,15 +585,42 @@ h2 {
 	float:left;
 }
 
+.ersvp, .eventdate {
+	float: left;
+}
+
+.eventdate {
+	float: right;
+}
+
+.eventdesc {
+	margin-bottom: 25px;
+}
+
 .clear {
 	clear:both;
 }
 .eventdate_wrapper {
 	float: left;
-    height: 62px;
-    width: 202px;
-    height: 100px;
-    background: #333;
+    width: 243px;
+    background: #fff;
+    border:1px solid #ccc;
+    padding: 15px 15px 5px;
+    color: #000;
+    border-radius: 0 0 5px 5px;
+    line-height: 1.3em;
+    font-family: Helvetica;
+    
+    background: rgb(255,255,255); /* Old browsers */
+	background: -moz-linear-gradient(top,  rgba(255,255,255,1) 0%, rgba(246,246,246,1) 47%, rgba(237,237,237,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(47%,rgba(246,246,246,1)), color-stop(100%,rgba(237,237,237,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(246,246,246,1) 47%,rgba(237,237,237,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(246,246,246,1) 47%,rgba(237,237,237,1) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(246,246,246,1) 47%,rgba(237,237,237,1) 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  rgba(255,255,255,1) 0%,rgba(246,246,246,1) 47%,rgba(237,237,237,1) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ededed',GradientType=0 ); /* IE6-9 */
+
+    
 }
 
 .register_page {
@@ -581,11 +638,19 @@ h2 {
     font-size: 15px;
     width: 150px;
 }
-
+proleftcol
 .reginput, .siinput {
 	float: left;
     margin-left: 25px;
     width: 225px;
+}
+
+.proleftcol.event {
+	width: 400px;
+}
+
+.proleftcol.event h2 {
+	text-align: left;
 }
 
 .ui-widget-header {
@@ -594,4 +659,97 @@ h2 {
 
 .regsubmit {
 	float:right;
+}
+
+.profileview {
+	margin-top:30px;
+	margin-bottom:30px;
+}
+
+.proleftcol, .promidcol, .prorightcol  {
+	float:left;
+	margin-right: 20px;
+}
+
+.proleftcol {
+	margin-left: 30px;
+	width: 200px;
+}
+
+.promidcol {
+	width: 500px;
+}
+
+.prorightcol {
+	width: 380px;
+	margin-right:0;
+}
+
+.profile_header {
+	text-align:center;
+	text-transform: uppercase;
+	margin-bottom: 15px;
+	font-weight: bold;
+}
+
+.imgarea {
+	margin-bottom: 20px;
+}
+
+.noevents {
+	text-align: center;
+}
+
+.procomments {
+	margin-top: 30px;
+}
+
+.galimg {
+	float:left;
+	margin-right: 10px;
+	margin-top: 10px;
+}
+
+.attend {
+	background-color: #2C5BB2;
+    border-bottom: 1px solid #222222;
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: 5px 2px 8px 1px;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    line-height: 1.2;
+	margin-top:10px;
+    padding: 5px 6px 10px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: 0 -1px 1px #222222;
+    font-family: 'PacificoRegular';
+}
+
+.unattend {
+	background-color: #D81B17;
+    border-bottom: 1px solid #222222;
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: 5px 2px 8px 1px;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    line-height: 1.2;
+    margin-top: 10px;
+    padding: 5px 6px 10px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: 0 -1px 1px #222222;
+    font-family: 'PacificoRegular';
+}
+
+.eventdate_bottom {
+	bo
 }
